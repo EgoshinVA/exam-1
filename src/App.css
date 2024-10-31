@@ -8,8 +8,17 @@
     justify-content: center;
     padding: 10px;
     border-radius: 5px;
+    border: 3px solid #52d8ef;
 }
 
 .redColor {
     color: red;
+}
+
+.buttonBlock{
+    padding: 2px 0;
+}
+
+button {
+    width: 75px;
 }

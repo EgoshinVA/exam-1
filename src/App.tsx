@@ -8,20 +8,21 @@ function App() {
     const [maxValue, setMaxValue] = useState<number>(5)
 
     const increment = () => {
-        setTitle(title + 1)
+        title < maxValue && setTitle(title + 1)
     }
 
     const reset = () => {
         setTitle(0)
-        setMaxValue(Math.floor(Math.random() * (10 - 1 + 1)) + 1)
+        setMaxValue(Math.floor(Math.random() * 10) + 1)
     }
 
     return (
         <div className={'app'}>
             <span>Max value: {maxValue}</span>
             <h1 className={title === maxValue ? 'redColor' : ''}>{title}</h1>
-            <div>
-                <ProgressBar completed={title} maxCompleted={maxValue} height={'5px'} bgColor={'black'} isLabelVisible={false}/>
+            <ProgressBar completed={title} maxCompleted={maxValue} height={'5px'} width={'150px'} bgColor={'#52d8ef'}
+                         transitionDuration={'0.3s'} isLabelVisible={false}/>
+            <div className={'buttonBlock'}>
                 <Button isDisables={title >= maxValue} onCLick={increment} title={'inc'}/>
                 <Button isDisables={title === 0} onCLick={reset} title={'reset'}/>
             </div>
