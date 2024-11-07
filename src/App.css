@@ -1,5 +1,9 @@
 .app {
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.block {
     background-color: #707070;
     width: 200px;
     display: flex;
@@ -21,4 +25,8 @@
 
 button {
     width: 75px;
+}
+
+.errorInput {
+    border: 3px red solid;
 }
