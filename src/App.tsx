@@ -1,17 +1,30 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Counter} from "./components/Counter";
 import {Params} from "./components/Params";
 
 function App() {
-    const [startValue, setStartValue] = useState<number>(0)
-    const [maxValue, setMaxValue] = useState<number>(5)
+    const [startValue, setStartValue] = useState<number>(localStorage.getItem('startValue') ? Number(localStorage.getItem('startValue')) : 0)
+    const [maxValue, setMaxValue] = useState<number>(localStorage.getItem('maxValue') ? Number(localStorage.getItem('maxValue')) : 5)
     const [isValuesChanged, setIsValuesChanged] = useState<boolean>(false)
+    const [isFirstRender, setIsFirstRender] = useState<boolean>(true)
+
+    useEffect(() => {
+        if (isFirstRender) {
+            setIsFirstRender(false);
+            return;
+        }
+        setIsValuesChanged(true)
+    }, [startValue, maxValue])
 
     const setValue = (startValue: number, maxValue: number) => {
-        setStartValue(startValue)
-        setMaxValue(maxValue)
-        setIsValuesChanged(false)
+        if (startValue < maxValue && startValue >= 0) {
+            setStartValue(startValue)
+            setMaxValue(maxValue)
+            setIsValuesChanged(false)
+            localStorage.setItem('startValue', JSON.stringify(startValue))
+            localStorage.setItem('maxValue', JSON.stringify(maxValue))
+        }
     }
 
     return (

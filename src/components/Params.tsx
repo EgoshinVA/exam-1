@@ -15,10 +15,10 @@ export const Params: React.FC<ParamsPropsType> = ({startValue, maxValue, setStar
         <div className={'block'}>
             <span>Max value:</span>
             <input value={maxValue} onChange={(e) => setMaxValue(Number(e.currentTarget.value))}
-                   className={maxValue <= startValue ? 'errorInput' : ''} type="number"/>
+                   className={maxValue <= startValue || maxValue < 0 ? 'errorInput' : ''} type="number"/>
             <span>Start value:</span>
             <input value={startValue} onChange={(e) => setStartValue(Number(e.currentTarget.value))}
-                   className={maxValue <= startValue ? 'errorInput' : ''} type="number"/>
+                   className={maxValue <= startValue || startValue < 0 ? 'errorInput' : ''} type="number"/>
             <Button onCLick={() => setValue(startValue, maxValue)} isDisables={maxValue <= startValue} title={'set'}/>
         </div>
     );

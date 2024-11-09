@@ -28,5 +28,5 @@ button {
 }
 
 .errorInput {
-    border: 3px red solid;
+    outline: 3px red solid;
 }
