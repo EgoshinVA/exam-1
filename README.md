@@ -1,2 +1,2 @@
 <h2>Simple counter using typescript and localstorage.</h2>
-![image](https://github.com/user-attachments/assets/e4f8b705-dac7-4694-84c3-f3b0bea63e7c)
+<p>![image](https://github.com/user-attachments/assets/e4f8b705-dac7-4694-84c3-f3b0bea63e7c)</p>
