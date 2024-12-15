@@ -9,25 +9,25 @@ const initialState: StateType = {
 }
 
 test('reducer should change start value', () => {
-    const newState = reducer(initialState, {type: CHANGE_START_VALUE, value: 20})
+    const newState = reducer(initialState, {type: CHANGE_START_VALUE, payload: 20})
 
     expect(newState.startValue).toBe(20)
 })
 
 test('reducer should change max value', () => {
-    const newState = reducer(initialState, {type: CHANGE_MAX_VALUE, value: 10})
+    const newState = reducer(initialState, {type: CHANGE_MAX_VALUE, payload: 10})
 
     expect(newState.maxValue).toBe(10)
 })
 
 test('reducer should change IsValueChanged', () => {
-    const newState = reducer(initialState, {type: CHANGE_IS_VALUE_CHANGED, value: true})
+    const newState = reducer(initialState, {type: CHANGE_IS_VALUE_CHANGED, payload: true})
 
     expect(newState.isValuesChanged).toBe(true)
 })
 
 test('reducer should change IsFirstRender', () => {
-    const newState = reducer(initialState, {type: CHANGE_IS_FIRST_RENDER, value: false})
+    const newState = reducer(initialState, {type: CHANGE_IS_FIRST_RENDER, payload: false})
 
     expect(newState.isFirstRender).toBe(false)
 })
