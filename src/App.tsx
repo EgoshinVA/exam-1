@@ -2,51 +2,43 @@ import React, {useEffect} from 'react';
 import './App.css';
 import {Counter} from "./components/Counter";
 import {Params} from "./components/Params";
-import {StateType} from "./components/reducer/Reducer";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "./store/Store";
-
-export const CHANGE_START_VALUE = 'CHANGE-START-VALUE'
-export const CHANGE_MAX_VALUE = 'CHANGE-MAX-VALUE'
-export const CHANGE_IS_VALUE_CHANGED = 'CHANGE-IS-VALUE-CHANGED'
-export const CHANGE_IS_FIRST_RENDER = 'CHANGE-IS-FIRST-RENDER'
-
-// const initialState: StateType = {
-//     startValue: localStorage.getItem('startValue') ? Number(localStorage.getItem('startValue')) : 0,
-//     maxValue: localStorage.getItem('maxValue') ? Number(localStorage.getItem('maxValue')) : 6,
-//     isValuesChanged: false,
-//     isFirstRender: true
-// }
+import {
+    changeIsFirstRenderAC, changeIsValueChangedAC,
+    changeMaxValueAC,
+    changeStartValueAC,
+    setStateFromLSTC,
+    setValueTC,
+    StateType
+} from "./components/reducer/CounterReducer";
+import {useAppDispatch, useAppSelector} from "./store/Store";
 
 function App() {
-    // const [state, dispatch] = useReducer(reducer, initialState)
-
-    const state = useSelector<RootState, StateType>(state => state.app);
-    const dispatch = useDispatch();
+    const state = useAppSelector<StateType>(state => state.counter);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (state.isFirstRender) {
-            dispatch({type: CHANGE_IS_FIRST_RENDER, payload: false});
+            dispatch(changeIsFirstRenderAC(false));
             return;
         }
-        dispatch({type: CHANGE_IS_VALUE_CHANGED, payload: true});
+        dispatch(changeIsValueChangedAC(true));
     }, [state.startValue, state.maxValue])
+
+    useEffect(() => {
+        dispatch(setStateFromLSTC());
+    }, []);
 
     const setValue = (startValue: number, maxValue: number) => {
         if (startValue < maxValue && startValue >= 0) {
-            dispatch({type: CHANGE_START_VALUE, payload: startValue});
-            dispatch({type: CHANGE_MAX_VALUE, payload: maxValue});
-            dispatch({type: CHANGE_IS_VALUE_CHANGED, payload: false});
-            // localStorage.setItem('startValue', JSON.stringify(startValue))
-            // localStorage.setItem('maxValue', JSON.stringify(maxValue))
+            dispatch(setValueTC(startValue, maxValue))
         }
     }
 
     return (
         <div className={'app'}>
             <Params startValue={state.startValue} maxValue={state.maxValue}
-                    setStartValue={(payload: number) => dispatch({type: CHANGE_START_VALUE, payload})}
-                    setMaxValue={(payload: number) => dispatch({type: CHANGE_MAX_VALUE, payload})}
+                    setStartValue={(payload: number) => dispatch(changeStartValueAC(payload))}
+                    setMaxValue={(payload: number) => dispatch(changeMaxValueAC(payload))}
                     setValue={setValue}/>
             <Counter isValuesChanged={state.isValuesChanged} maxValue={state.maxValue} startValue={state.startValue}/>
         </div>

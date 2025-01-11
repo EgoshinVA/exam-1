@@ -12,7 +12,7 @@ export const Counter: React.FC<CounterPropsType> = ({maxValue, startValue, isVal
 
     useEffect(() => {
         setTitle(startValue)
-    }, [isValuesChanged])
+    }, [startValue])
 
     const increment = () => {
         !isValuesChanged && title < maxValue && setTitle(title + 1)
